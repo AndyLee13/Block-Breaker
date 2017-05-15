@@ -14,4 +14,15 @@ public class LevelManager : MonoBehaviour {
 	public void LoadNextLevel(){
 		Application.LoadLevel (Application.loadedLevel+1);
 	}
+
+	public void GameOver(){
+		LoadLevel ("Lose");
+		Brick.breakableCount = 0;
+	}
+
+	public void BrickDestroyed() {
+		if(Brick.breakableCount<=0){
+			LoadNextLevel ();
+		}
+	}
 }

@@ -8,11 +8,9 @@ public class LoseCollider : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D trigger){
 		levelManager = GameObject.FindObjectOfType<LevelManager> ();
-		print ("Trigger");
-		levelManager.LoadLevel("Lose");
+		levelManager.GameOver();
 	}
 
 	void OnCollisionEnter2D(Collision2D collision){
-		print ("Collision");
 	}
 }

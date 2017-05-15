@@ -15,12 +15,21 @@ public class Ball : MonoBehaviour {
 		if (!hasStarted) {
 			// Lock the ball relative to the paddle
 			this.transform.position = paddle.transform.position + paddleToBallVector;
-		}
 
-		//wait for a mouse click to launch
-		if (Input.GetMouseButtonDown(0)) {
-			hasStarted = true;
-			this.rigidbody2D.velocity = new Vector2(2f,10f);
+			//wait for a mouse click to launch
+			if (Input.GetMouseButtonDown (0)) {
+				hasStarted = true;
+				this.rigidbody2D.velocity = new Vector2 (2f, 10f);
+			}
 		}
 	}
+
+	void OnCollisionEnter2D(Collision2D collision){
+		Vector2 tweak = new Vector2 (Random.Range (-0.2f, 0.2f), Random.Range (-0.2f, 0.2f));
+		if (hasStarted) {
+			audio.Play();
+			rigidbody2D.velocity += tweak;
+		}
+	}
+
 }

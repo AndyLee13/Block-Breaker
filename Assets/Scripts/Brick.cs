@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Brick : MonoBehaviour {
 
-	public int maxHits;
 	public Sprite[] hitSprites;
 
 	private int timesHit;
@@ -21,14 +20,19 @@ public class Brick : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D collision){
 		timesHit++;
+		int maxHits = hitSprites.Length + 1;
 		if (timesHit >= maxHits) {
 			Destroy (gameObject);
+		} else {
+			LoadSprite ();
 		}
 	}
-	// TODO Remove this method once we can actually win!
 
-	void SimulateWin ()
+	void LoadSprite ()
 	{
-		levelManager.LoadNextLevel ();
+		int spriteIndex = timesHit - 1;
+		if (hitSprites [spriteIndex]) {
+			this.GetComponent<SpriteRenderer> ().sprite = hitSprites [spriteIndex];
+		}
 	}
 }
